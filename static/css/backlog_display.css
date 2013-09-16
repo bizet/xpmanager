@@ -19,3 +19,14 @@
 #backlog_display_area #head_area ._td {
   text-align: center;
 }
+
+#backlog_display_area ._td .glyphicon {
+  width: 18px;
+  height: 18px;
+  color: #DDD;
+}
+
+
+#backlog_display_area ._td .glyphicon:hover {
+  color: #666;
+}
