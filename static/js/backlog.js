@@ -288,22 +288,12 @@
               $('<td class="_td"></td>').css('width', '12%').html(story.create_time),
               $('<td class="_td"></td>').css('width', '8%').html(story.status),
               $('<td class="_td"></td>').css('width', '8%').append(
-                $('<span class="glyphicon glyphicon-fullscreen btn_split_story"></span>').click(function(event) {
+                $('<span class="glyphicon glyphicon-fullscreen btn_split_story" title="split story"></span>').click(function(event) {
                   backlog_modify.btn_split_story_click(option, story.id);
-                }).tooltip({
-                  animation: false,
-                  title: 'split story',
-                  placement: 'top',
-                  container: 'body'
                 }),
-                $('<span class="glyphicon glyphicon-remove btn_delete_story"></span>').click(function(event) {
+                $('<span class="glyphicon glyphicon-remove btn_delete_story" title="delete story"></span>').click(function(event) {
                   $(this).tooltip('destroy');
                   backlog_modify.btn_delete_story_click(option, story.id);
-                }).tooltip({
-                  animation: false,
-                  title: 'delete story',
-                  placement: 'top',
-                  container: 'body'
                 })
               )
             )
@@ -321,14 +311,9 @@
               $('<td class="_td"></td>').css('width', '12%').html(sub_stories[i].create_time),
               $('<td class="_td"></td>').css('width', '8%').html(sub_stories[i].status),
               $('<td class="_td"></td>').css('width', '8%').append(
-                $('<span class="glyphicon glyphicon-remove btn_delete_story"></span>').click(function(event) {
+                $('<span class="glyphicon glyphicon-remove btn_delete_story" title="delete story"></span>').click(function(event) {
                   $(this).tooltip('destroy');
                   backlog_modify.btn_delete_story_click(option, sub_stories[i].id);
-                }).tooltip({
-                  animation: false,
-                  title: 'delete story',
-                  placement: 'top',
-                  container: 'body'
                 })
               )
             )
