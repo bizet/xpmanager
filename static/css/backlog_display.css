@@ -1,0 +1,21 @@
+#backlog_display_area,
+#backlog_display_area div,
+#backlog_display_area span,
+#backlog_display_area td,
+#backlog_display_area li,
+#backlog_display_area ul {
+  position: relative;
+  list-style: none;
+  height: auto;
+}
+
+#backlog_display_area ._td {
+  height: 20px;
+  font-family: 'Trebuchet MS';
+  font-size: 9px;
+  border-bottom: solid 1px #DDD;
+}
+
+#backlog_display_area #head_area ._td {
+  text-align: center;
+}
