@@ -297,7 +297,7 @@
                   container: 'body'
                 }),
                 $('<span class="glyphicon glyphicon-remove btn_delete_story"></span>').click(function(event) {
-                  $(this).tooltip('hide');
+                  $(this).tooltip('destroy');
                   backlog_modify.btn_delete_story_click(option, story.id);
                 }).tooltip({
                   animation: false,
@@ -322,7 +322,7 @@
               $('<td class="_td"></td>').css('width', '8%').html(sub_stories[i].status),
               $('<td class="_td"></td>').css('width', '8%').append(
                 $('<span class="glyphicon glyphicon-remove btn_delete_story"></span>').click(function(event) {
-                  $(this).tooltip('hide');
+                  $(this).tooltip('destroy');
                   backlog_modify.btn_delete_story_click(option, sub_stories[i].id);
                 }).tooltip({
                   animation: false,
