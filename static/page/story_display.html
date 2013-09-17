@@ -5,13 +5,10 @@ $def with (dom_module)
     <title>Xp Manager</title>
     <link href="/static/js/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="/static/js/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet" />
-    <link href="/static/css/backlog_display.css" rel="stylesheet" />
   </head>
   <body>
-  	<div id="backlog_display_area"></div>
-    <button class='btn btn-primary btn-xs' id='btn_add_new_story'>add new story</button>
+  	<div id="story_display_area"></div>
   </body>
-  $:dom_module.story_modify_dialog()
 </html>
 <script src="/static/js/jquery.min.js"></script>
 <script src="/static/js/jquery.cookie.js"></script>
@@ -24,9 +21,4 @@ $def with (dom_module)
 </script>
 <script src="/static/js/backlog.js"></script>
 <script type="text/javascript">
-	xpmanager.backlog.init({
-		backlog_display_area: $$('#backlog_display_area'),
-    btn_add_new_story: $$('#btn_add_new_story'),
-    dlg_story_modify: $$('#dlg_story_modify')
-	});
 </script>
