@@ -34,7 +34,7 @@
       anddothis.call(object, backlog_list);
     });
   };
-  var update_backlog = function(anddothis, object) {
+  this.update_backlog = function(anddothis, object) {
     $.ajax({
       url: '/backlog/get_by_project_id',
       type: 'POST',
@@ -68,7 +68,7 @@
   this.init = function(opt) {
     var option = $.extend(defaults, opt);
     backlog_display.init(option);
-    update_backlog(backlog_display.display, this);
+    xpmanager.backlog.update_backlog(backlog_display.display, this);
     backlog_modify.init(option);
   };
 
@@ -115,7 +115,7 @@
     };
     var dialog_init = function(opt) {
       /* get parent story list */
-      update_backlog(select_parent_id_init, this);
+      xpmanager.backlog.update_backlog(select_parent_id_init, this);
       /* get risk_option list */
       xpmanager.options.risk.get_risk_options(select_risk_init, this);
       /* get status_option list */

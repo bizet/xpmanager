@@ -10,7 +10,7 @@ urls = (
   '/backlog/(.+)', 'backlog_control',
   '/risk/(.+)', 'risk_control',
   '/status/(.+)', 'status_control',
-  '/(.+)', 'page',
+  '/(.+).html', 'page',
 )
 
 web.config.debug = True
