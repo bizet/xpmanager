@@ -2,5 +2,6 @@ xpmanager
 =========
 1. Install:
 	a. Install Python
-	b. Install web.py
-	c. Mysql Server
+	b. easy_install web.py
+  c. easy_install mysql-python
+  d. easy_install configobj

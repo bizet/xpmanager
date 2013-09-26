@@ -1,0 +1,32 @@
+.story_display,
+.story_display div,
+.story_display span,
+.story_display td,
+.story_display li,
+.story_display ul {
+  position: relative;
+  list-style: none;
+  height: auto;
+}
+
+.story_display ._td {
+  height: 20px;
+  font-family: 'Trebuchet MS';
+  font-size: 9px;
+  border-bottom: solid 1px #DDD;
+}
+
+.story_display #head_area ._td {
+  text-align: center;
+}
+
+.story_display ._td .glyphicon {
+  width: 18px;
+  height: 18px;
+  color: #DDD;
+}
+
+
+.story_display ._td .glyphicon:hover {
+  color: #666;
+}

@@ -48,7 +48,7 @@
       anddothis.call(object, backlog_list);
     });
   };
-  var change_order = function(order, anddothis, object) {
+  this.change_order = function(order, anddothis, object) {
     $.ajax({
       url: '/backlog/change_order',
       type: 'POST',
@@ -215,7 +215,7 @@
       $('<thead id="head_area"></tr>').append(
         $('<tr></tr>').css('width', '100%').append(
           $('<td class="_td"></td>').css('width', '5%').html(''),
-          $('<td class="_td"></td>').css('width', '45%').append($('<label></label>').html('Requirement')),
+          $('<td class="_td"></td>').css('width', '45%').html('Requirement'),
           $('<td class="_td"></td>').css('width', '15%').html('Market Value'),
           $('<td class="_td"></td>').css('width', '7%').html('Risk'),
           $('<td class="_td"></td>').css('width', '12%').html('Create Time'),
@@ -259,7 +259,7 @@
               order.push($(this).attr('index'));
             }
           });
-          change_order(order.join(","), update_story_display, this);
+          xpmanager.backlog.change_order(order.join(","), update_story_display, this);
         }
       });
     };
