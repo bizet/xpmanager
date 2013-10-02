@@ -36,18 +36,21 @@ class Backlog:
 
   def get_by_project_id(self, i):
     backlog_list = list(db_xpmanager.query('''
-      SELECT  backlog.id as id, 
-              backlog.name as name, 
-              backlog.parent_id as parent_id, 
-              backlog.market_value as market_value, 
-              risk.name as risk, 
-              status.name as status, 
-              backlog.create_time as create_time,
-              backlog.order_num as order_num
-        FROM  backlog, project, risk, status
-        WHERE backlog.risk_id = risk.id 
-          AND backlog.status_id = status.id
-          AND project_id = %d
+      SELECT  backlog.id AS id, 
+              backlog.name AS name, 
+              backlog.parent_id AS parent_id, 
+              backlog.market_value AS market_value, 
+              risk.name AS risk, 
+              status.name AS status, 
+              backlog.create_time AS create_time,
+              backlog.order_num AS order_num,
+              sprint.count AS sprint_count
+        FROM  backlog 
+   LEFT JOIN  sprint   ON  backlog.sprint_id = sprint.id
+   LEFT JOIN  project  ON  backlog.project_id = project.id
+   LEFT JOIN  risk     ON  backlog.risk_id = risk.id
+   LEFT JOIN  status   ON  backlog.status_id = status.id
+       WHERE  backlog.project_id = %d
           ''' % (int(i.project_id))))
     return backlog_list
 

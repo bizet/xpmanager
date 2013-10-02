@@ -31,7 +31,7 @@
             $('<th class="_td"></th>').css('width', '7%').html('Risk'),
             $('<th class="_td"></th>').css('width', '12%').html('Create Time'),
             $('<th class="_td"></th>').css('width', '8%').html('Status'),
-            $('<th class="_td"></th>').css('width', '8%').html('')
+            $('<th class="_td"></th>').css('width', '8%').html('Sprint')
           )
         ),
         elem.table_body_dom
@@ -78,7 +78,7 @@
           $('<td class="_td"></td>').css('width', '7%').html(story.risk),
           $('<td class="_td"></td>').css('width', '12%').html(story.create_time),
           $('<td class="_td"></td>').css('width', '8%').html(story.status),
-          $('<td class="_td"></td>').css('width', '8%').html('')
+          $('<td class="_td"></td>').css('width', '8%').html('Sprint' + story.sprint_count)
         )
       );
     };
