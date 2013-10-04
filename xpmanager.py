@@ -5,12 +5,16 @@ from server.jencode import JEncoder
 from server.backlog import Backlog
 from server.risk import Risk
 from server.status import Status
+from server.sprint import Sprint
+from server.project import Project
 
 urls = (
   '/backlog/(.+)', 'backlog_control',
   '/risk/(.+)', 'risk_control',
   '/status/(.+)', 'status_control',
-  '/(.+).html', 'page',
+  '/sprint/(.+)', 'sprint_control',
+  '/project/(.+)', 'project_control',
+  '/(.+).html.*', 'page',
 )
 
 web.config.debug = True
@@ -21,9 +25,15 @@ class page:
   def GET(self, p):
     try:
       f = getattr(template, p)
-      return f(page_module)
-    except:
-      return
+      paras = {}
+      ps = web.ctx.query[1:].split('&')
+      for para in ps:
+        if '=' not in para: continue
+        k, v = para.split('=')
+        paras[k] = v
+      return f(page_module, paras)
+    except Exception, e:
+      return Exception, ':', e
 
 class Fac():
   def __init__(self):
@@ -43,6 +53,14 @@ class risk_control(Fac):
 class status_control(Fac):
   def __init__(self):
     self.c = Status()
+
+class sprint_control(Fac):
+  def __init__(self):
+    self.c = Sprint()
+
+class project_control(Fac):
+  def __init__(self):
+    self.c = Project()
 
 app = web.application(urls, globals(), autoreload = True)
 

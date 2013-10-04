@@ -42,8 +42,10 @@ class Backlog:
               backlog.market_value AS market_value, 
               risk.name AS risk, 
               status.name AS status, 
+              backlog.status_id AS status_id,
               backlog.create_time AS create_time,
               backlog.order_num AS order_num,
+              backlog.sprint_id AS sprint_id,
               sprint.count AS sprint_count
         FROM  backlog 
    LEFT JOIN  sprint   ON  backlog.sprint_id = sprint.id
@@ -64,6 +66,15 @@ class Backlog:
         where = 'id = %d AND project_id = %d' % (int(n), int(project_id)), 
         order_num = new_order)
       new_order += 1
+    return self.get_by_project_id(i)
+
+  def change_sprint(self, i): 
+    change_story_id = i.story_id
+    project_id = i.project_id
+    sprint_id = i.sprint_id
+    db_xpmanager.update('backlog',
+      where = 'id = %d AND project_id = %d' % (int(change_story_id), int(project_id)),
+      sprint_id = int(sprint_id))
     return self.get_by_project_id(i)
 
 

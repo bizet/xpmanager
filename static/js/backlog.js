@@ -63,6 +63,19 @@
       anddothis.call(object, backlog_list);
     });
   };
+
+  this.change_sprint = function(data, anddothis, object) {
+    $.ajax({
+      url: '/backlog/change_sprint',
+      type: 'POST',
+      dataType: 'json',
+      data: $.extend({project_id: project_id}, data),
+    })
+    .done(function(_backlog_list) {
+      backlog_list = _backlog_list.sort(function(a, b){return a.order_num - b.order_num});
+      anddothis.call(object, backlog_list);
+    });
+  }
   
   
   this.init = function(opt) {

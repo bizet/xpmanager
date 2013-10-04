@@ -9,12 +9,16 @@ $def with (dom_module, para)
     <meta http-equiv="Expires" content="0" />
     <link href="/static/js/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="/static/js/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet" />
-    <link href="/static/css/story_display.css" rel="stylesheet" />
+    <link href="/static/css/status_wall_display.css" rel="stylesheet" />
+    <style>
+      * {
+        font-family: 'Trebuchet MS';
+      }
+    </style>
   </head>
   <body>
-    <div id="story_display_area" class="story_display"></div>
+    <div id="status_wall_display_area"></div>
   </body>
-  $:dom_module.sprint_choose_dialog()
 </html>
 <script src="/static/js/jquery.min.js"></script>
 <script src="/static/js/jquery.cookie.js"></script>
@@ -25,14 +29,18 @@ $def with (dom_module, para)
     project_id: 1
   };
 </script>
+<script src="/static/js/project.js"></script>
 <script src="/static/js/backlog.js"></script>
 <script src="/static/js/story.js"></script>
 <script src="/static/js/sprint.js"></script>
 <script type="text/javascript">
   $$(function() {
-    xpmanager.story.init({
-      story_display_area: $$('#story_display_area'),
-      sprint_choose_dialog_dom: $$('#dlg_choose_sprint'),
+    xpmanager.sprint.status_wall.init({
+      status_wall_display_area: $$('#status_wall_display_area'),
+      $if para['sprint_id']: 
+        sprint_id: $para['sprint_id'],
+      $else: 
+        sprint_id: 0,
     });
   });
 </script>

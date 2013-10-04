@@ -1,10 +1,14 @@
 ;xpmanager.story = new (function($, project_id) {
   var defaults = {
-    story_display_area: ''
+    story_display_area: '',
+    sprint_choose_dialog_dom: ''
   };
   this.init = function(opt) {
     var option = $.extend(defaults, opt, {backlog_display_area: opt.story_display_area});
     display.init(option);
+    xpmanager.sprint.base.choose_dialog.init({
+      sprint_choose_dialog_dom: option.sprint_choose_dialog_dom
+    });
     xpmanager.backlog.update_backlog(function(story_list) {
       display.display(story_list);
     }, display);
@@ -70,6 +74,8 @@
       };
     };
     var add_story_line = function(story) {
+      var _this = this;
+      var sprint_str = story.sprint_count ? 'sprint ' + story.sprint_count : '';
       elem.table_body_dom.append(
         $('<tr></tr>').attr('index', story.id).append(
           $('<td class="_td"></td>').css('width', '5%').html(story.order_num),
@@ -78,7 +84,17 @@
           $('<td class="_td"></td>').css('width', '7%').html(story.risk),
           $('<td class="_td"></td>').css('width', '12%').html(story.create_time),
           $('<td class="_td"></td>').css('width', '8%').html(story.status),
-          $('<td class="_td"></td>').css('width', '8%').html('Sprint' + story.sprint_count)
+          $('<td class="_td"></td>').css('width', '8%').html(sprint_str).click(function() {
+            xpmanager.sprint.base.choose_dialog.show({
+              click_fun: function(checked_sprint_id) {
+                xpmanager.backlog.change_sprint({
+                  story_id: story.id,
+                  sprint_id: checked_sprint_id
+                }, update_story_display, _this);
+              },
+              dialog_title: 'choose sprint for "' + story.name + '"'
+            });
+          })
         )
       );
     };
