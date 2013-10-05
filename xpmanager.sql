@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
--- 主机:                           172.24.186.248
--- 服务器版本:                        5.1.69 - Source distribution
--- 服务器操作系统:                      redhat-linux-gnu
--- HeidiSQL 版本:                  7.0.0.4381
+-- 主机:                           127.0.0.1
+-- 服务器版本:                        5.6.14 - MySQL Community Server (GPL)
+-- 服务器操作系统:                      Win32
+-- HeidiSQL 版本:                  8.0.0.4540
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -33,16 +33,16 @@ INSERT INTO `backlog` (`id`, `parent_id`, `project_id`, `name`, `market_value`, 
 	(1, 0, 1, 'Upload', 1000, 1, 1, '2013-09-09 14:03:07', 3, 1),
 	(5, 0, 1, 'Patch Display', 1000, 1, 1, '2013-09-09 14:04:37', 2, 1),
 	(6, 1, 1, 'Upload 1 file', 1000, 1, 1, '2013-09-09 14:05:02', 2, 1),
-	(7, 1, 1, 'Upload 2 files', 1000, 3, 1, '2013-09-09 14:05:49', 3, 1),
+	(7, 1, 1, 'Upload 2 files', 1000, 3, 1, '2013-09-09 14:05:49', 1, 1),
 	(8, 0, 1, 'Download', 800, 1, 1, '2013-09-09 14:04:57', 5, 0),
-	(9, 8, 1, 'Download 1 file', 800, 1, 1, '2013-09-09 14:08:17', 1, 0),
+	(9, 8, 1, 'Download 1 file', 800, 1, 1, '2013-09-09 14:08:17', 5, 0),
 	(10, 0, 1, 'Validation', 1000, 2, 1, '2013-09-11 15:33:54', 4, 0),
 	(14, 0, 1, 'User Request', 1000, 2, 1, '2013-09-12 16:13:31', 1, 0),
-	(44, 10, 1, 'test2', 1000, 2, 1, '2013-09-17 13:18:58', 4, 0),
-	(16, 14, 1, 'Test 1', 1000, 2, 1, '2013-09-12 16:38:18', 6, 0),
-	(24, 14, 1, 'test3', 1000, 2, 1, '2013-09-16 15:36:29', 7, 0),
-	(23, 14, 1, 'test2', 1000, 2, 1, '2013-09-16 15:36:12', 5, 0),
-	(25, 14, 1, 'test4', 1000, 1, 1, '2013-09-16 15:43:13', 8, 0);
+	(44, 10, 1, 'test2', 1000, 2, 1, '2013-09-17 13:18:58', 3, 1),
+	(16, 14, 1, 'Test 1', 1000, 2, 1, '2013-09-12 16:38:18', 4, 1),
+	(24, 14, 1, 'test3', 1000, 2, 1, '2013-09-16 15:36:29', 8, 0),
+	(23, 14, 1, 'test2', 1000, 2, 1, '2013-09-16 15:36:12', 6, 0),
+	(25, 14, 1, 'test4', 1000, 1, 1, '2013-09-16 15:43:13', 7, 0);
 /*!40000 ALTER TABLE `backlog` ENABLE KEYS */;
 
 
@@ -52,14 +52,15 @@ CREATE TABLE IF NOT EXISTS `project` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL DEFAULT '',
   `desc` text,
+  `workflow` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- 正在导出表  xpmanager.project 的数据：1 rows
 DELETE FROM `project`;
 /*!40000 ALTER TABLE `project` DISABLE KEYS */;
-INSERT INTO `project` (`id`, `name`, `desc`) VALUES
-	(1, 'TPMS', NULL);
+INSERT INTO `project` (`id`, `name`, `desc`, `workflow`) VALUES
+	(1, 'TPMS', NULL, '1;2;3;4');
 /*!40000 ALTER TABLE `project` ENABLE KEYS */;
 
 
@@ -113,7 +114,7 @@ DELETE FROM `status`;
 /*!40000 ALTER TABLE `status` DISABLE KEYS */;
 INSERT INTO `status` (`id`, `name`) VALUES
 	(1, 'plan'),
-	(2, 'todo'),
+	(2, 'to do'),
 	(3, 'doing'),
 	(4, 'done');
 /*!40000 ALTER TABLE `status` ENABLE KEYS */;
