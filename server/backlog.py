@@ -56,6 +56,15 @@ class Backlog:
           ''' % (int(i.project_id))))
     return backlog_list
 
+  def get_by_sprint_id(self, i):
+    backlog_list = self.get_by_project_id(i)
+    sprint_id = i.sprint_id
+    sprint_story_list = []
+    for story in backlog_list:
+      if int(story.sprint_id) == int(sprint_id) and int(story.parent_id) != 0:
+        sprint_story_list.append(story)
+    return sprint_story_list
+
   def change_order(self, i):
     order = i.order.split(',')
     project_id = i.project_id
@@ -77,4 +86,11 @@ class Backlog:
       sprint_id = int(sprint_id))
     return self.get_by_project_id(i)
 
-
+  def change_status(self, i): 
+    change_story_id = i.story_id
+    project_id = i.project_id
+    status_id = i.status_id
+    db_xpmanager.update('backlog',
+      where = 'id = %d AND project_id = %d' % (int(change_story_id), int(project_id)),
+      status_id = int(status_id))
+    return self.get_by_project_id(i)

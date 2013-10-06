@@ -10,63 +10,9 @@
     default_market_value: 1000,
     display_area_width: '750px',
   };
-  var delete_story = function(data, anddothis, object) {
+  var get_story_list = function(method, data, anddothis, object) {
     $.ajax({
-      url: '/backlog/delete_story',
-      type: 'POST',
-      dataType: 'json',
-      data: data,
-    })
-    .done(function(_backlog_list) {
-      backlog_list = _backlog_list.sort(function(a, b){return a.order_num - b.order_num});
-      anddothis.call(object, backlog_list);
-    });
-  }
-  var add_new_story = function(data, anddothis, object) {
-    $.ajax({
-      url: '/backlog/add_new_story',
-      type: 'POST',
-      dataType: 'json',
-      data: data,
-    })
-    .done(function(_backlog_list) {
-      backlog_list = _backlog_list.sort(function(a, b){return a.order_num - b.order_num});
-      anddothis.call(object, backlog_list);
-    });
-  };
-  this.update_backlog = function(anddothis, object) {
-    $.ajax({
-      url: '/backlog/get_by_project_id',
-      type: 'POST',
-      dataType: 'json',
-      data: {
-        project_id: project_id
-      },
-    })
-    .done(function(_backlog_list) {
-      backlog_list = _backlog_list.sort(function(a, b){return a.order_num - b.order_num});
-      anddothis.call(object, backlog_list);
-    });
-  };
-  this.change_order = function(order, anddothis, object) {
-    $.ajax({
-      url: '/backlog/change_order',
-      type: 'POST',
-      dataType: 'json',
-      data: {
-        project_id: project_id,
-        order: order
-      },
-    })
-    .done(function(_backlog_list) {
-      backlog_list = _backlog_list.sort(function(a, b){return a.order_num - b.order_num});
-      anddothis.call(object, backlog_list);
-    });
-  };
-
-  this.change_sprint = function(data, anddothis, object) {
-    $.ajax({
-      url: '/backlog/change_sprint',
+      url: '/backlog/' + method,
       type: 'POST',
       dataType: 'json',
       data: $.extend({project_id: project_id}, data),
@@ -75,7 +21,30 @@
       backlog_list = _backlog_list.sort(function(a, b){return a.order_num - b.order_num});
       anddothis.call(object, backlog_list);
     });
+  };
+  var delete_story = function(data, anddothis, object) {
+    get_story_list('delete_story', data, anddothis, object);
   }
+  var add_new_story = function(data, anddothis, object) {
+    get_story_list('add_new_story', data, anddothis, object);
+  };
+  this.get_by_sprint_id = function(data, anddothis, object) {
+    get_story_list('get_by_sprint_id', data, anddothis, object);
+  }
+  this.update_backlog = function(anddothis, object) {
+    get_story_list('get_by_project_id', {}, anddothis, object);
+  };
+  this.change_order = function(order, anddothis, object) {
+    get_story_list('change_order', {order:order}, anddothis, object);
+  };
+
+  this.change_sprint = function(data, anddothis, object) {
+    get_story_list('change_sprint', data, anddothis, object);
+  };
+
+  this.change_status = function(data, anddothis, object) {
+    get_story_list('change_status', data, anddothis, object);
+  };
   
   
   this.init = function(opt) {
@@ -120,7 +89,6 @@
     };
     this.btn_delete_story_click = function(opt, story_id) {
       delete_story({
-          project_id: project_id,
           id: story_id
         }, function(backlog_list){
           backlog_display.display(backlog_list);
@@ -177,7 +145,6 @@
       dlg_elements.input_requirement.val('');
       dlg_elements.btn_confirm.html('Save Changes').unbind().click(function(event) {
         add_new_story({
-          project_id: project_id,
           parent_id: dlg_elements.select_parent_id.val(),
           name: dlg_elements.input_requirement.val(),
           market_value: dlg_elements.input_market_value.val(),
@@ -201,7 +168,6 @@
       dlg_elements.input_requirement.val('');
       dlg_elements.btn_confirm.html('Save Changes').unbind().click(function(event) {
         add_new_story({
-          project_id: project_id,
           parent_id: 0,
           name: dlg_elements.input_requirement.val(),
           market_value: dlg_elements.input_market_value.val(),

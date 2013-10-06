@@ -33,9 +33,19 @@ xpmanager.sprint.status_wall = new (function($, project_id){
       elem.status_wall_display_area.find($('ul')).dragsort({ 
         dragSelector: "div", 
         dragBetween: true, 
-        placeHolderTemplate: "<li class='placeHolder'><div></div></li>" 
+        placeHolderTemplate: "<li class='placeHolder'><div></div></li>",
+        dragEnd: function() {
+          var story_id = $(this).attr('story_id');
+          var status_id = $(this).parent().attr('id').replace('status', '');
+          xpmanager.backlog.change_status({
+            story_id: story_id,
+            status_id: status_id
+          }, update_story_display, this);
+        }
       });
-      update_story_display();
+      xpmanager.backlog.get_by_sprint_id({
+        sprint_id: sprint_id
+      }, update_story_display, this);
     };
     var create_status_area = function(w) {
       return (
@@ -47,19 +57,17 @@ xpmanager.sprint.status_wall = new (function($, project_id){
     };
     var create_story_item = function(s) {
       return (
-        $('<li></li>').append($('<div></div>').html(s.name))
+        $('<li story_id="' + s.id + '"></li>').append($('<div></div>').html(s.name))
       );
     };
-    var update_story_display = function() {
+    var update_story_display = function(story_list) {
       elem.status_wall_display_area.find($('ul')).html('');
-      xpmanager.backlog.update_backlog(function(story_list) {
-        for (var i = 0; i < story_list.length; i++) {
-          if (story_list[i].sprint_id != sprint_id || story_list[i].parent_id == 0) { continue; };
-          elem.status_wall_display_area.find($('ul#status' + story_list[i].status_id)).append(
-            create_story_item(story_list[i])
-          );
-        };
-      }, this);
+      for (var i = 0; i < story_list.length; i++) {
+        if (story_list[i].sprint_id != sprint_id || story_list[i].parent_id == 0) { continue; };
+        elem.status_wall_display_area.find($('ul#status' + story_list[i].status_id)).append(
+          create_story_item(story_list[i])
+        );
+      };
     };
   })();
 
