@@ -16,13 +16,13 @@ $def with (dom_module, para)
         font-family: 'Trebuchet MS';
       }
       body {
-        margin: 50px 20px;
+        margin: 70px 20px;
       }
     </style>
   </head>
   <body>
     $:dom_module.nav_bar()
-    <div id="status_wall_display_area"></div>
+    <div id="burn_down_chart_display_area"></div>
   </body>
 </html>
 <script src="/static/js/jquery.min.js"></script>
@@ -45,8 +45,8 @@ $def with (dom_module, para)
 <script src="/static/js/sprint.js"></script>
 <script type="text/javascript">
   $$(function() {
-    xpmanager.sprint.status_wall.init({
-      status_wall_display_area: $$('#status_wall_display_area'),
+    xpmanager.sprint.burn_down_chart.init({
+      status_wall_display_area: $$('#burn_down_chart_display_area'),
       $if para['sprint_id']: 
         sprint_id: $para['sprint_id'],
       $else: 

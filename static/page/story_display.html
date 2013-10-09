@@ -10,8 +10,17 @@ $def with (dom_module, para)
     <link href="/static/js/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="/static/js/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet" />
     <link href="/static/css/story_display.css" rel="stylesheet" />
+    <style>
+      * {
+        font-family: 'Trebuchet MS';
+      }
+      body {
+        margin: 70px 20px;
+      }
+    </style>
   </head>
   <body>
+    $:dom_module.nav_bar()
     <div id="story_display_area" class="story_display"></div>
   </body>
   $:dom_module.sprint_choose_dialog()

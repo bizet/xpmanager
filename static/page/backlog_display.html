@@ -3,6 +3,7 @@ $def with (dom_module, para)
 <html>
   <head>
     <title>Xp Manager</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Cache-Control" content="no-cache,must-revalidate" />
@@ -10,10 +11,19 @@ $def with (dom_module, para)
     <link href="/static/js/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="/static/js/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet" />
     <link href="/static/css/story_display.css" rel="stylesheet" />
+    <style>
+      * {
+        font-family: 'Trebuchet MS';
+      }
+      body {
+        margin: 70px 20px;
+      }
+    </style>
   </head>
   <body>
-  	<div id="backlog_display_area" class="story_display"></div>
+    $:dom_module.nav_bar()
     <button class='btn btn-primary btn-xs' id='btn_add_new_story'>add new story</button>
+  	<div id="backlog_display_area" class="story_display"></div>
   </body>
   $:dom_module.story_modify_dialog()
 </html>
@@ -21,12 +31,18 @@ $def with (dom_module, para)
 <script src="/static/js/jquery.cookie.js"></script>
 <script src='/static/js/jquery.dragsort-0.5.1.min.js'></script>
 <script src='/static/js/bootstrap/dist/js/bootstrap.min.js'></script>
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+  <script src="/static/js/bootstrap/assets/js/html5shiv.js"></script>
+  <script src="/static/js/bootstrap/assets/js/respond.min.js"></script>
+<![endif]-->
 <script type="text/javascript">
 	var xpmanager = {
 		project_id: 1
 	};
 </script>
 <script src="/static/js/backlog.js"></script>
+<script src="/static/js/options.js"></script>
 <script type="text/javascript">
 	xpmanager.backlog.init({
 		backlog_display_area: $$('#backlog_display_area'),
