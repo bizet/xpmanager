@@ -2,3 +2,9 @@
 USER=root
 PASS=root
 HOST=localhost
+
+[MAIL]
+SERVER=
+PORT=
+USER=
+PASS=
